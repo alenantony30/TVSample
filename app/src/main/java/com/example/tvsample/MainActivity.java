@@ -24,18 +24,11 @@ import java.util.List;
 public class MainActivity extends Activity implements View.OnFocusChangeListener,View.OnClickListener,View.OnKeyListener{
 
 
-
-
-
-
     public static String BASE_URL="https://api.themoviedb.org";
     public static  String API_KEY="f847336cfad8c531603d08281a375f21";
     public static String LANGUAGE="en-US";
     public static int PAGE=1;
     public static String CATEGORY="now_playing";
-
-
-
 
 
     public  static Boolean fetching=true;
@@ -120,48 +113,12 @@ public class MainActivity extends Activity implements View.OnFocusChangeListener
             view.setBackgroundColor(getResources().getColor(R.color.onfocus));
             setAlpha(view,1);
         }
-        switch (view.getId()){
 
-            case R.id.tv:
-
-                Log.i("cursts"," tv focusChangeListeneer");
-
-                Toast.makeText(this, "tv focusChangeListeneer", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.liveTv:
-                Log.i("cursts"," live tv focusChangeListeneer");
-                Toast.makeText(this, "live tv focusChangeListeneer", Toast.LENGTH_SHORT).show();
-
-                break;
-            case R.id.movies:
-                Log.i("cursts"," movies focusChangeListeneer");
-                Toast.makeText(this, "movies focusChangeListeneer", Toast.LENGTH_SHORT).show();
-
-                break;
-            case R.id.shows:
-                Log.i("cursts"," shows focusChangeListeneer");
-
-                Toast.makeText(this, "shows focusChangeListeneer", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.apps:
-                Log.i("cursts"," apps focusChangeListeneer");
-                Toast.makeText(this, "apps focusChangeListeneer", Toast.LENGTH_SHORT).show();
-
-                break;
-
-
-        }
 
     }
 
     @Override
     public void onClick(View view) {
-
-        if(view.getId()==R.id.nowPlayingMovieImage){
-
-            Log.i("video","playing");
-
-        }
 
     }
 
@@ -170,36 +127,20 @@ public class MainActivity extends Activity implements View.OnFocusChangeListener
 
 
 
-        Log.i("error",keyEvent+"");
+
 
         switch (view.getId()){
 
             case R.id.tv:
-
                 nowPlayingMovies.setVisibility(View.GONE);
-
-                Log.i("cursts"," tv onKeyListener");
-
-                Toast.makeText(this, "tv onKeyListener", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.liveTv:
                 nowPlayingMovies.setVisibility(View.GONE);
-                Log.i("cursts"," live tv onKeyListener");
-                Toast.makeText(this, "live tv onKeyListener", Toast.LENGTH_SHORT).show();
-
                 break;
             case R.id.movies:
                 nowPlayingMovies.setVisibility(View.VISIBLE);
-
-
-
-                Log.i("cursts"," movies onKeyListener");
-
-
-
                 final int childcount = nowPlayingMovies.getChildCount();
                 for (int in = 0; in < childcount; in++) {
-
 
                     View v = nowPlayingMovies.getChildAt(in);
                     setAlpha(v,0.5f);
@@ -218,26 +159,14 @@ public class MainActivity extends Activity implements View.OnFocusChangeListener
                         }
                     });
 
-//                    v.setBackgroundColor(Color.BLUE);
-//                    Log.i("error",childcount+"");
-
                 }
-
-                Toast.makeText(this, "movies onKeyListener", Toast.LENGTH_SHORT).show();
-
 
                 break;
             case R.id.shows:
                 nowPlayingMovies.setVisibility(View.GONE);
-                Log.i("cursts"," shows onKeyListener");
-
-                Toast.makeText(this, "shows onKeyListener", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.apps:
                 nowPlayingMovies.setVisibility(View.GONE);
-                Log.i("cursts"," apps onKeyListener");
-                Toast.makeText(this, "apps onKeyListener", Toast.LENGTH_SHORT).show();
-
                 break;
 
 

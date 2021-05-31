@@ -6,6 +6,10 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.ExoPlayer;
@@ -32,16 +36,22 @@ public class Player extends Activity implements ExoPlayer.EventListener {
     SimpleExoPlayer exoPlayer;
     SimpleExoPlayerView exoPlayerView;
     String videoURL ="https://media.geeksforgeeks.org/wp-content/uploads/20201217163353/Screenrecorder-2020-12-17-16-32-03-350.mp4";
+    ProgressBar progressBar;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player);
 
-
+        progressBar=findViewById(R.id.progressBar);
         exoPlayerView = findViewById(R.id.exoPlayerView);
         playVideo();
-        exoPlayer.addListener(this);
+
+
+
+
 
         }
     public void playVideo(){
@@ -87,6 +97,10 @@ public class Player extends Activity implements ExoPlayer.EventListener {
             // when it is ready.
             exoPlayer.setPlayWhenReady(true);
 
+            exoPlayer.addListener(this);
+
+            
+
         } catch (Exception e) {
             // below line is used for
             // handling our errors.
@@ -94,7 +108,6 @@ public class Player extends Activity implements ExoPlayer.EventListener {
         }
     }
 
-    
 
     @Override
     public void onTimelineChanged(Timeline timeline, Object manifest) {
@@ -114,6 +127,12 @@ public class Player extends Activity implements ExoPlayer.EventListener {
     @Override
     public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
 
+        if(playbackState==ExoPlayer.STATE_READY)
+            progressBar.setVisibility(View.GONE);
+        if(playbackState==ExoPlayer.STATE_BUFFERING)
+            progressBar.setVisibility(View.VISIBLE);
+
+
     }
 
     @Override
@@ -129,5 +148,12 @@ public class Player extends Activity implements ExoPlayer.EventListener {
     @Override
     public void onPlaybackParametersChanged(PlaybackParameters playbackParameters) {
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        exoPlayer.release();
+        exoPlayer=null;
     }
 }
